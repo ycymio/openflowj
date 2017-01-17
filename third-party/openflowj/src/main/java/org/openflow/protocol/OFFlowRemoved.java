@@ -14,8 +14,12 @@ public class OFFlowRemoved extends OFMessage {
 
     public enum OFFlowRemovedReason {
         OFPRR_IDLE_TIMEOUT,
-        OFPRR_HARD_TIMEOUT,
-        OFPRR_DELETE
+        OFPRR_HARD_TIMEOUT_TEST,
+        OFPRR_DELETE,               /* Evicted by a DELETE flow mod. */
+        OFPRR_GROUP_DELETE,         /* Group was removed. */
+        OFPRR_METER_DELETE,         /* Meter was removed. */
+        OFPRR_EVICTION,             /* Switch eviction to free resources. */
+        OFPRR_ADD_TEST,
     }
 
     protected OFMatch match;

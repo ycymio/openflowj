@@ -15,12 +15,16 @@ public class OFFlowRemovedTest extends OFTestCase {
         byte[] hwAddr = new byte[6];
         msg.getMatch().setDataLayerDestination(hwAddr);
         msg.getMatch().setDataLayerSource(hwAddr);
+//        msg.setReason(OFFlowRemovedReason.OFPRR_ADD_TEST);
+//        TestCase.assertEquals(OFFlowRemovedReason.OFPRR_ADD_TEST, msg.getReason());
+
         msg.setReason(OFFlowRemovedReason.OFPRR_DELETE);
         ByteBuffer bb = ByteBuffer.allocate(1024);
         bb.clear();
         msg.writeTo(bb);
         bb.flip();
         msg.readFrom(bb);
+        TestCase.assertEquals(OFType.FLOW_REMOVED, msg.getType());
         TestCase.assertEquals(OFType.FLOW_REMOVED, msg.getType());
         TestCase.assertEquals(OFFlowRemovedReason.OFPRR_DELETE, msg.getReason());
     }
